@@ -1,0 +1,96 @@
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (30 rows each, select loading)
+    |
+    +-> onetomany -> B2 (30 rows each, select loading)
+    |
+    +-> onetomany -> B3 (30 rows each, select loading)
+
+Querying...
+{'rows': 1820, 'statements': 61, 'exec_time': 0.0004589557647705078, 'orm_time': 0.1231689453125, 'average_btw_exec': 0.0019865958921370967, 'columns': 5440}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (30 rows each, subquery loading)
+    |
+    +-> onetomany -> B2 (30 rows each, subquery loading)
+    |
+    +-> onetomany -> B3 (30 rows each, subquery loading)
+
+Querying...
+{'rows': 1820, 'statements': 4, 'exec_time': 0.002107858657836914, 'orm_time': 0.09604597091674805, 'average_btw_exec': 0.01920919418334961, 'columns': 7240}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (10 rows each, select loading)
+        |
+        +-> onetomany -> C1 (10 rows each, select loading)
+            |
+            +-> onetomany -> D1 (10 rows each, select loading)
+
+Querying...
+{'rows': 22220, 'statements': 2221, 'exec_time': 0.0024089813232421875, 'orm_time': 7.89879584312439, 'average_btw_exec': 0.003554813610767052, 'columns': 66640}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (10 rows each, joined loading)
+        |
+        +-> onetomany -> C1 (10 rows each, joined loading)
+            |
+            +-> onetomany -> D1 (10 rows each, joined loading)
+
+Querying...
+{'rows': 20000, 'statements': 1, 'exec_time': 0.18572783470153809, 'orm_time': 1.4653937816619873, 'average_btw_exec': 0.7326968908309937, 'columns': 220000}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (10 rows each, subquery loading)
+        |
+        +-> onetomany -> C1 (10 rows each, subquery loading)
+            |
+            +-> onetomany -> D1 (10 rows each, subquery loading)
+
+Querying...
+{'rows': 22220, 'statements': 4, 'exec_time': 0.09108400344848633, 'orm_time': 1.412647008895874, 'average_btw_exec': 0.2825294017791748, 'columns': 88840}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (10 rows each, select loading)
+        |
+        +-> onetomany -> C1 (5 rows each, select loading)
+    |
+    +-> onetomany -> B2 (10 rows each, select loading)
+        |
+        +-> onetomany -> C2 (5 rows each, select loading)
+    |
+    +-> onetomany -> B3 (10 rows each, select loading)
+        |
+        +-> onetomany -> C3 (5 rows each, select loading)
+
+Querying...
+{'rows': 3620, 'statements': 661, 'exec_time': 0.0002808570861816406, 'orm_time': 0.7842237949371338, 'average_btw_exec': 0.001184628089028903, 'columns': 10840}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (10 rows each, subquery loading)
+        |
+        +-> onetomany -> C1 (5 rows each, subquery loading)
+    |
+    +-> onetomany -> B2 (10 rows each, subquery loading)
+        |
+        +-> onetomany -> C2 (5 rows each, subquery loading)
+    |
+    +-> onetomany -> B3 (10 rows each, subquery loading)
+        |
+        +-> onetomany -> C3 (5 rows each, subquery loading)
+
+Querying...
+{'rows': 3620, 'statements': 7, 'exec_time': 0.003631114959716797, 'orm_time': 0.2044661045074463, 'average_btw_exec': 0.025558263063430786, 'columns': 14440}

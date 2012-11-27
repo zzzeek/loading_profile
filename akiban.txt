@@ -1,0 +1,138 @@
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (30 rows each, select loading)
+    |
+    +-> onetomany -> B2 (30 rows each, select loading)
+    |
+    +-> onetomany -> B3 (30 rows each, select loading)
+
+Querying...
+{'rows': 1820, 'statements': 61, 'exec_time': 0.002299070358276367, 'orm_time': 0.27094078063964844, 'average_btw_exec': 0.004370012590962071, 'columns': 5440}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (30 rows each, subquery loading)
+    |
+    +-> onetomany -> B2 (30 rows each, subquery loading)
+    |
+    +-> onetomany -> B3 (30 rows each, subquery loading)
+
+Querying...
+{'rows': 1820, 'statements': 4, 'exec_time': 0.027164936065673828, 'orm_time': 0.1820368766784668, 'average_btw_exec': 0.03640737533569336, 'columns': 7240}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (30 rows each, akiban_nested loading)
+    |
+    +-> onetomany -> B2 (30 rows each, akiban_nested loading)
+    |
+    +-> onetomany -> B3 (30 rows each, akiban_nested loading)
+
+Querying...
+{'rows': 20, 'statements': 1, 'exec_time': 0.028223037719726562, 'orm_time': 0.10058903694152832, 'average_btw_exec': 0.05029451847076416, 'columns': 100}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (10 rows each, select loading)
+        |
+        +-> onetomany -> C1 (10 rows each, select loading)
+            |
+            +-> onetomany -> D1 (10 rows each, select loading)
+
+Querying...
+{'rows': 22220, 'statements': 2221, 'exec_time': 0.019384145736694336, 'orm_time': 46.14020395278931, 'average_btw_exec': 0.020765168295584748, 'columns': 66640}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (10 rows each, joined loading)
+        |
+        +-> onetomany -> C1 (10 rows each, joined loading)
+            |
+            +-> onetomany -> D1 (10 rows each, joined loading)
+
+Querying...
+{'rows': 20000, 'statements': 1, 'exec_time': 1.1699888706207275, 'orm_time': 2.395047187805176, 'average_btw_exec': 1.197523593902588, 'columns': 220000}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (10 rows each, subquery loading)
+        |
+        +-> onetomany -> C1 (10 rows each, subquery loading)
+            |
+            +-> onetomany -> D1 (10 rows each, subquery loading)
+
+Querying...
+{'rows': 22220, 'statements': 4, 'exec_time': 0.7586791515350342, 'orm_time': 2.225011110305786, 'average_btw_exec': 0.44500222206115725, 'columns': 88840}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (10 rows each, akiban_nested loading)
+        |
+        +-> onetomany -> C1 (10 rows each, akiban_nested loading)
+            |
+            +-> onetomany -> D1 (10 rows each, akiban_nested loading)
+
+Querying...
+{'rows': 20, 'statements': 1, 'exec_time': 0.44820713996887207, 'orm_time': 1.591944932937622, 'average_btw_exec': 0.795972466468811, 'columns': 60}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (10 rows each, select loading)
+        |
+        +-> onetomany -> C1 (5 rows each, select loading)
+    |
+    +-> onetomany -> B2 (10 rows each, select loading)
+        |
+        +-> onetomany -> C2 (5 rows each, select loading)
+    |
+    +-> onetomany -> B3 (10 rows each, select loading)
+        |
+        +-> onetomany -> C3 (5 rows each, select loading)
+
+Querying...
+{'rows': 3620, 'statements': 661, 'exec_time': 0.0031800270080566406, 'orm_time': 2.846673011779785, 'average_btw_exec': 0.00430011028969756, 'columns': 10840}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (10 rows each, subquery loading)
+        |
+        +-> onetomany -> C1 (5 rows each, subquery loading)
+    |
+    +-> onetomany -> B2 (10 rows each, subquery loading)
+        |
+        +-> onetomany -> C2 (5 rows each, subquery loading)
+    |
+    +-> onetomany -> B3 (10 rows each, subquery loading)
+        |
+        +-> onetomany -> C3 (5 rows each, subquery loading)
+
+Querying...
+{'rows': 3620, 'statements': 7, 'exec_time': 0.03694891929626465, 'orm_time': 0.34398698806762695, 'average_btw_exec': 0.04299837350845337, 'columns': 14440}
+--------------------
+Setting up...
+A (20 rows)
+    |
+    +-> onetomany -> B1 (10 rows each, akiban_nested loading)
+        |
+        +-> onetomany -> C1 (5 rows each, akiban_nested loading)
+    |
+    +-> onetomany -> B2 (10 rows each, akiban_nested loading)
+        |
+        +-> onetomany -> C2 (5 rows each, akiban_nested loading)
+    |
+    +-> onetomany -> B3 (10 rows each, akiban_nested loading)
+        |
+        +-> onetomany -> C3 (5 rows each, akiban_nested loading)
+
+Querying...
+{'rows': 20, 'statements': 1, 'exec_time': 0.07358694076538086, 'orm_time': 0.24739813804626465, 'average_btw_exec': 0.12369906902313232, 'columns': 100}
