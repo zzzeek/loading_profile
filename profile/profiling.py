@@ -28,6 +28,37 @@ def cprofiled(fn):
 from sqlalchemy import event
 
 
+def _nested_fetch(cursor):
+    colcount = [0]
+    rowcount = [0]
+
+    def fetch(cursor):
+        for row in cursor.fetchall():
+            rowcount[0] += 1
+            for i, col in enumerate(cursor.description):
+                colcount[0] += 1
+                if col[1] == 5001:
+                    fetch(row[i])
+    fetch(cursor)
+    return rowcount[0], colcount[0]
+
+
+def _warmup_statement(cursor, statement, parameters, cache):
+    if statement not in cache:
+        cache[statement] = True
+        for i in xrange(20):
+            time_, ret = _timeit(cursor.execute, statement, parameters)
+            #print "warmup", statement
+            if time_ > 2:
+                return
+
+
+def _timeit(fn, *arg, **kw):
+    now = time.time()
+    ret = fn(*arg, **kw)
+    total = time.time() - now
+    return total, ret
+
 def profile_sql(engine, fn):
     stmt_catch = []
 
@@ -43,11 +74,15 @@ def profile_sql(engine, fn):
     end_time = time.time()
 
     total_exec_time = 0
+    total_fetch_time = 0
     total_statements = 0
     total_rows = 0
     total_columns = 0
 
     delays = []
+
+    # we want to run statements 20 times for akiban warmup
+    cache = {}
 
     prev_timestamp = start_time
     dbapi_conn = engine.raw_connection()
@@ -58,16 +93,22 @@ def profile_sql(engine, fn):
 
             total_statements += 1
             cursor = dbapi_conn.cursor()
-            now = time.time()
+
+            #_warmup_statement(cursor, statement, parameters, cache)
+
             if executemany:
-                cursor.executemany(statement, parameters)
-                rows = []
+                exec_only_time, ret = _timeit(cursor.executemany, statement, parameters)
+                fetch_time = 0
+                rows = 0
+                columns = 0
             else:
-                cursor.execute(statement, parameters)
-                rows = cursor.fetchall()
-            total_exec_time = time.time() - now
-            total_rows += len(rows)
-            total_columns += len(rows) * len(cursor.description)
+                exec_only_time, ret = _timeit(cursor.execute, statement, parameters)
+                fetch_time, (rows, columns) = _timeit(_nested_fetch, cursor)
+
+            total_exec_time += exec_only_time
+            total_fetch_time += fetch_time
+            total_rows += rows
+            total_columns += columns
             cursor.close()
     finally:
         dbapi_conn.close()
@@ -77,6 +118,7 @@ def profile_sql(engine, fn):
     return {
         'orm_time': end_time - start_time,
         'exec_time': total_exec_time,
+        'fetch_time': total_fetch_time,
         'statements': total_statements,
         'rows': total_rows,
         'columns': total_columns,

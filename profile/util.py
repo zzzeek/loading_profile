@@ -12,7 +12,7 @@ def drop_all(engine):
 
     to_drop = set()
     for table_name in inspector.get_table_names():
-        if re.match(r'[abcdefghijk]\d?', table_name):
+        if re.match(r'^[abcdefghijk]\d?$', table_name):
             to_drop.add(table_name)
 
     for tname in reversed(sorted(to_drop)):

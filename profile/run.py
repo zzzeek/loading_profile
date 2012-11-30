@@ -19,8 +19,8 @@ def run(_fixture, engine):
 
 def shallow_wide_onetomany():
     for strategy in strategies:
-        if strategy == 'joined':
-            continue
+#        if strategy == 'joined':
+#            continue
         o = fixture.objects(20)
         o.onetomany(strategy, 30)
         o.onetomany(strategy, 30)
